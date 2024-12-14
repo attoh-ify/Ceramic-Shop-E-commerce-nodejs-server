@@ -16,7 +16,7 @@ server.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 
 server.use('/auth', authRoute);
 server.use('/admin', adminRoute);
-server.use('/', categoryRoute);
+server.use('/category', categoryRoute);
 
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}...`);

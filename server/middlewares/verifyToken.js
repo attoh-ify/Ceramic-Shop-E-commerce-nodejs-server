@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models');
+const { User } = require('../models');
 
 const verifyUserToken = (req, res, next) => {
     const token = req.cookies.userToken;
@@ -8,7 +8,7 @@ const verifyUserToken = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
         if (err) return res.status(401).json({ message: "Token not valid" });
-        req.userID = payload.id;
+        req.userId = payload.id;
 
         next();
     })
@@ -28,9 +28,10 @@ const verifyAdminToken = (req, res, next) => {
             }
         });
         if (user_.role === 'admin') {
+            req.userId = payload.id;
+        } else {
             return res.status(403).json({ message: "Token not Authorised" });
         };
-        req.userId = payload.id;
 
         next();
     })

@@ -1,33 +1,32 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { Category } = require('../models');
-const { v4: uuidv4 } = require('uuid');
 
 
-const createCategory = async (req, res) => {
-    const { name, description, slug } = req.body;
-
+const getCategories = async (req, res) => {
     try {
-        // check if name is taken
-        const name_ = await Category.findOne({
-            where: {
-                name: name
-            }
-        });
-        if (name_) return res.status(401).json({ message: 'Category name taken' });
+        const allCategories = await Category.findAll();
 
-        const newCategory = await Category.create({
-            name: name,
-            description: description,
-            slug: slug
-        });
-
-        return res.status(200).json({ message: `${name} Category created successfully` });
+        return res.status(200).json({ categories: allCategories });
     } catch (error) {
         console.log(error);
-        return res.status(500).json({ message: "Failed to add new category" });
+        return res.status(500).json({ message: "Failed to get all categories" });
     };
 };
 
 
-module.exports = { createCategory };
+const getCategory = async (req, res) => {
+    try {
+        const category = await Category.findOne({
+            where: {
+                slug: req.params.slug
+            }
+        });
+
+        return res.status(200).json({ categories: category });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Failed to get category" });
+    };
+};
+
+
+module.exports = { getCategories, getCategory };

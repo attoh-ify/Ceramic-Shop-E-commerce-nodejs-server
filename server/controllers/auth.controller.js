@@ -115,7 +115,7 @@ const getProfile = async (req, res) => {
 
 
 const updateProfile = async (req, res) => {
-    const { password, ...userDetails } = req.body;
+    const { password, role, ...userDetails } = req.body;
 
     try {
         const [updatedProfile] = await User.update(userDetails, {
@@ -152,7 +152,7 @@ const updateProfile = async (req, res) => {
 };
 
 
-const deleteUser = async (req, res) => {
+const deleteAccount = async (req, res) => {
     try {
         const deletedUser = await User.destroy({
             where: {
@@ -172,4 +172,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { register, login, logout, getProfile, updateProfile, deleteUser };
+module.exports = { register, login, logout, getProfile, updateProfile, deleteAccount };

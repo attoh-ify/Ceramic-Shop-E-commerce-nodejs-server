@@ -26,6 +26,11 @@ module.exports = {
         allowNull: false,
         defaultValue: 0.0,
       },
+      currency: {
+        type: DataTypes.ENUM('naira', 'dollar', 'pound', 'euro', 'rand', 'yen'),
+        allowNull: false,
+        defaultValue: "naira",
+      },
       color: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -33,10 +38,6 @@ module.exports = {
       material: {
         type: Sequelize.STRING,
         allowNull: true,
-      },
-      vendor: {
-        type: Sequelize.STRING,
-        allowNull: false,
       },
       tags: {
         type: DataTypes.ARRAY(DataTypes.STRING),
@@ -48,6 +49,7 @@ module.exports = {
       },
       userId: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
           model: 'Users',
           key: 'id',
@@ -57,6 +59,7 @@ module.exports = {
       },
       categoryId: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
           model: 'Categories',
           key: 'id',

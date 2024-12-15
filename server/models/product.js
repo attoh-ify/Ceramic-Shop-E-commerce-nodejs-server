@@ -36,9 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     price: DataTypes.FLOAT,
+    currency: DataTypes.ENUM('naira', 'dollar', 'pound', 'euro', 'rand', 'yen'),
     color: DataTypes.STRING,
     material: DataTypes.STRING,
-    vendor: DataTypes.STRING,
     tags: DataTypes.ARRAY(DataTypes.STRING),
     stock: DataTypes.INTEGER
   }, {

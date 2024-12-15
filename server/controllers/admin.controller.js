@@ -4,7 +4,36 @@ const { User, Category } = require('../models');
 const { v4: uuidv4 } = require('uuid');
 
 
-//
+// Auth
+const updateUserProfile = async (req, res) => {
+    const { id, role } = req.body;
+
+    try {
+        const statusEnum = User.rawAttributes.role.values;
+        console.log(statusEnum);
+
+
+        const [updatedProfile] = await User.update({role}, {
+            where: {
+                id: id
+            }
+        });
+
+        const newUserProfile = await User.findOne({
+            where: {
+                id: id
+            }
+        });
+        const { password: userPassword, ...userInfo } = newUserProfile.dataValues;
+
+        return res.status(200).json({ userProfileDetails: userInfo });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Failed to update user profile" });
+    }
+};
+
+
 const deleteUser = async (req, res) => {
     const { userId } = req.body;
 
@@ -60,7 +89,7 @@ const updateCategory = async (req, res) => {
     const { slug } = req.params;
 
     try {
-        // check if category is exists
+        // check if category exists
         const category_ = await Category.findOne({
             where: {
                 slug: slug
@@ -103,4 +132,4 @@ const deleteCategory = async (req, res) => {
 };
 
 
-module.exports = { deleteUser, createCategory, updateCategory, deleteCategory };
+module.exports = { updateUserProfile, deleteUser, createCategory, updateCategory, deleteCategory };

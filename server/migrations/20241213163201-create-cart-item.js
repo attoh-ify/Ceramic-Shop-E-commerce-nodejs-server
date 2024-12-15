@@ -19,6 +19,7 @@ module.exports = {
       },
       cartId: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
           model: 'Carts',
           key: 'id',
@@ -28,6 +29,7 @@ module.exports = {
       },
       productId: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
           model: 'Products',
           key: 'id',

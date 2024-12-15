@@ -24,6 +24,7 @@ module.exports = {
       },
       orderId: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
           model: 'Orders',
           key: 'id',
@@ -33,6 +34,7 @@ module.exports = {
       },
       productId: {
         type: DataTypes.UUID,
+        allowNull: false,
         references: {
           model: 'Products',
           key: 'id',

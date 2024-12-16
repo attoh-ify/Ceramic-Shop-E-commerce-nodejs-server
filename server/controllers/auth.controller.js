@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
+const { User, Cart } = require('../models');
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -29,12 +29,22 @@ const register = async (req, res) => {
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         const hashedPassword = await bcrypt.hash(password, salt);
+        const userId = uuidv4();
 
+        // Create User
         const newUser = await User.create({
-            id: uuidv4(),
+            id: userId,
             username: username,
             email: email,
             password: hashedPassword
+        });
+
+        // Create Cart
+        const userCart = await Cart.create({
+            id: uuidv4(),
+            total_quantity: 0,
+            total_price: 0,
+            userId: userId,
         });
 
         return res.status(200).json({ message: "User registered successfully" });
@@ -104,9 +114,15 @@ const getProfile = async (req, res) => {
             }
         });
 
+        const cart = await Cart.findOne({
+            where: {
+                userId: req.userId
+            }
+        });
+
         const { password: userPassword, ...userInfo } = userProfile.dataValues;
 
-        return res.status(200).json({ userProfileDetails: userInfo });
+        return res.status(200).json({ userProfileDetails: userInfo, cartDetails: cart });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Failed to get users profile" });
@@ -130,7 +146,7 @@ const updateProfile = async (req, res) => {
             const salt = await bcrypt.genSalt(saltRounds);
             const hashedPassword = await bcrypt.hash(password, salt);
 
-            const [updatedPassword] = await User.update({password: hashedPassword}, {
+            const [updatedPassword] = await User.update({ password: hashedPassword }, {
                 where: {
                     id: req.userId
                 }

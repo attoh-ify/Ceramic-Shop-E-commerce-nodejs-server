@@ -1,10 +1,8 @@
 const { Op } = require('sequelize');
 const { User, Category, Product } = require('../models');
 const { v4: uuidv4 } = require('uuid');
-const { where } = require('sequelize');
 
 
-// Vendor
 const createProduct = async (req, res) => {
     const { name, description, price, currency, color, material, tags, stock, category } = req.body;
 

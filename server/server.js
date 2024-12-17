@@ -6,6 +6,7 @@ const adminRoute = require('./routes/admin.route.js');
 const categoryRoute = require('./routes/category.route.js');
 const productRoute = require('./routes/product.route.js');
 const cartRoute = require('./routes/cart.route.js');
+const addressRoute = require('./routes/address.route.js');
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,6 +22,7 @@ server.use('/admin', adminRoute);
 server.use('/category', categoryRoute);
 server.use('/products', productRoute);
 server.use('/carts', cartRoute);
+server.use('/address', addressRoute);
 
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}...`);

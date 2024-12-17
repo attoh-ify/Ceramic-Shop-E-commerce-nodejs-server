@@ -23,8 +23,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         as: 'cart',
       });
-    }
-  }
+
+      // One-to-many association
+      User.hasMany(models.Address, {
+        foreignKey: 'userId',
+        as: 'addresses',
+      });
+    };
+  };
   User.init({
     username: DataTypes.STRING,
     email: DataTypes.STRING,

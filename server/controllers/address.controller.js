@@ -1,7 +1,6 @@
 const { Op } = require('sequelize');
 const { User, Address } = require('../models');
 const { v4: uuidv4 } = require('uuid');
-const address = require('../models/address');
 
 
 const getAddress = async (req, res) => {

@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Order.init({
-    status: DataTypes.ENUM('pending', 'paid', 'shipped', 'cancelled'),
+    status: DataTypes.ENUM("pending", "processing", "completed", "failed", "canceled", "shipped", "delivered"),
     total_price: DataTypes.INTEGER
   }, {
     sequelize,

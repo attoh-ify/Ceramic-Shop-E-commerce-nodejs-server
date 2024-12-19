@@ -13,7 +13,7 @@ module.exports = {
         unique: true,
       },
       status: {
-        type: DataTypes.ENUM('pending', 'paid', 'shipped', 'cancelled'),
+        type: DataTypes.ENUM("pending", "processing", "completed", "failed", "canceled", "shipped", "delivered"),
         defaultValue: 'pending',
       },
       total_price: {

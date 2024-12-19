@@ -1,8 +1,8 @@
-const processPayment = () => {};
+// const processPayment = () => {};
 
-const createOrder = () => {};
+// const createOrder = () => {};
 
-const cancelOrder = () => {};
+// const cancelOrder = () => {};
 
-const setOrderStatus = () => {};
+// const setOrderStatus = () => {};
 

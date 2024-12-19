@@ -4,7 +4,7 @@ const DataTypes = require('sequelize');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn('Orders', 'status', {
+    await queryInterface.addColumn("Orders", "status", {
       status: {
         type: DataTypes.ENUM("pending", "processing", "completed", "failed", "canceled", "shipped", "delivered"),
         defaultValue: "pending",

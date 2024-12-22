@@ -1,7 +1,7 @@
 const { Address } = require('../models');
 
 const initiatePayment = async () => {
-    const { paymentMethod } = req.body;
+    const { paymentMethod, currency } = req.body;
     
     try {
         const defaultAddress = await Address.findOne({

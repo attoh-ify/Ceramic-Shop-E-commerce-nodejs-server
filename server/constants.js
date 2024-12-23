@@ -1,4 +1,6 @@
-const bankCodes = {
+const payment_methods =  ['card', 'bank' , 'ussd', 'transfer']
+
+export const bankCodes = {
     "Access (Diamond)": "063",
     "Access": "044",
     "Ecobank": "050",

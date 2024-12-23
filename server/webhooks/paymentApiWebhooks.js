@@ -45,23 +45,6 @@ const initiatePaymentProcess = async () => {
     }
 };
 
-const callDirectGTBankAccountDebitWebhookurl = async() => {
-    const {status, success, message, data} = req.body;
-
-    try {
-        if (status === 400) {
-            return res.status(400).json({ message: "Invalid/No Authorization Key" });
-        } else if (status === 401) {
-            return res.status(401).json({ message: message });
-        };
-
-        // ValidatePaymentForDirectBankApiPayment();
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Failed to initiate payment" });
-    }
-};
-
 const createOrder = () => {};
 
 const cancelOrder = () => {};

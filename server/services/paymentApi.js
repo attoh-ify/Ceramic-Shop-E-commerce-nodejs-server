@@ -71,10 +71,6 @@ const DirectGTBankAccountDebit = async (name, email, amount, account_or_phoneno,
             }
         );
 
-        if (response.status !== 200) {
-            throw new Error(`HTTP error! Status: ${response.status}\n Message: ${response.message}`);
-        };
-
         const data = await response.json();
         return data;
     } catch (error) {
@@ -178,4 +174,4 @@ const VerifyTransaction = async (transaction_ref) => {
 };
 
 
-module.exports = {initiatePayment, DirectGTBankAccountDebit, ValidatePaymentForDirectBankApiPayment};
+module.exports = { initiatePayment, DirectGTBankAccountDebit, ValidatePaymentForDirectBankApiPayment, InitiateUSSDPayment, VerifyTransaction };
